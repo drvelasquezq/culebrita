@@ -116,7 +116,7 @@ function endGame() {
 }
 
 function drawGrid() {
-    context.strokeStyle = "#d8cbb7";
+    context.strokeStyle = "#2a2830";
     context.lineWidth = 1;
 
     for (let step = 0; step <= board.width; step += gridSize) {
@@ -144,14 +144,14 @@ function drawCell(x, y, color, inset = 2) {
 
 function draw() {
     context.clearRect(0, 0, board.width, board.height);
-    context.fillStyle = "#f8f4ee";
+    context.fillStyle = "#111118";
     context.fillRect(0, 0, board.width, board.height);
 
     drawGrid();
-    drawCell(food.x, food.y, "#d62828", 3);
+    drawCell(food.x, food.y, "#e63946", 3);
 
     snake.forEach((segment, index) => {
-        drawCell(segment.x, segment.y, index === 0 ? "#1d6f65" : "#2a9d8f");
+        drawCell(segment.x, segment.y, index === 0 ? "#20c9b8" : "#2a9d8f");
     });
 }
 
