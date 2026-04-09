@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Culebrita</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="game-shell">
+        <section class="panel">
+            <p class="eyebrow">Juego clásico</p>
+            <h1>Culebrita</h1>
+            <p class="description">
+                Usa las flechas o WASD para moverte, come la fruta y evita chocar con las paredes o contigo mismo.
+            </p>
+
+            <div class="stats">
+                <div>
+                    <span class="label">Puntaje</span>
+                    <strong id="score">0</strong>
+                </div>
+                <div>
+                    <span class="label">Mejor</span>
+                    <strong id="best-score">0</strong>
+                </div>
+            </div>
+
+            <button id="restart-button" type="button">Reiniciar partida</button>
+        </section>
+
+        <section class="board-wrap">
+            <canvas id="game-board" width="400" height="400" aria-label="Tablero del juego"></canvas>
+            <div id="status" class="status">Presiona una tecla para empezar</div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
