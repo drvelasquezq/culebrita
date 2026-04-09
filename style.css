@@ -141,6 +141,28 @@ canvas {
     font-size: 0.95rem;
 }
 
+.mobile-controls {
+    display: none;
+}
+
+.dir-btn {
+    width: 62px;
+    height: 62px;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--ink);
+    font-size: 1.35rem;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.24);
+    touch-action: manipulation;
+    user-select: none;
+}
+
+.dir-btn:active {
+    transform: translateY(1px) scale(0.98);
+}
+
 @media (max-width: 780px) {
     .game-shell {
         grid-template-columns: 1fr;
@@ -152,10 +174,41 @@ canvas {
 
     .board-wrap {
         order: 1;
+        padding-bottom: 128px;
     }
 
     .status {
         width: calc(100% - 32px);
+        bottom: 96px;
+    }
+
+    .mobile-controls {
+        position: absolute;
+        left: 50%;
         bottom: 18px;
+        transform: translateX(-50%);
+        display: grid;
+        grid-template-columns: repeat(3, 62px);
+        grid-template-rows: repeat(2, 62px);
+        gap: 10px;
+        grid-template-areas:
+            ". up ."
+            "left down right";
+    }
+
+    .up {
+        grid-area: up;
+    }
+
+    .left {
+        grid-area: left;
+    }
+
+    .down {
+        grid-area: down;
+    }
+
+    .right {
+        grid-area: right;
     }
 }

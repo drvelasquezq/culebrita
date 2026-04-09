@@ -4,12 +4,27 @@ const scoreElement = document.getElementById("score");
 const bestScoreElement = document.getElementById("best-score");
 const statusElement = document.getElementById("status");
 const restartButton = document.getElementById("restart-button");
+const touchButtons = document.querySelectorAll("[data-dir]");
 
 const gridSize = 20;
 const tileCount = board.width / gridSize;
 const INITIAL_DELAY = 130;
 const MIN_DELAY = 50;
 const SPEED_STEP = 15;
+const INPUT_DIRECTIONS = {
+    arrowup: { x: 0, y: -1 },
+    w: { x: 0, y: -1 },
+    up: { x: 0, y: -1 },
+    arrowdown: { x: 0, y: 1 },
+    s: { x: 0, y: 1 },
+    down: { x: 0, y: 1 },
+    arrowleft: { x: -1, y: 0 },
+    a: { x: -1, y: 0 },
+    left: { x: -1, y: 0 },
+    arrowright: { x: 1, y: 0 },
+    d: { x: 1, y: 0 },
+    right: { x: 1, y: 0 }
+};
 
 let tickDelay = INITIAL_DELAY;
 
@@ -155,21 +170,7 @@ function draw() {
     });
 }
 
-function handleDirectionChange(event) {
-    const key = event.key.toLowerCase();
-    const directions = {
-        arrowup: { x: 0, y: -1 },
-        w: { x: 0, y: -1 },
-        arrowdown: { x: 0, y: 1 },
-        s: { x: 0, y: 1 },
-        arrowleft: { x: -1, y: 0 },
-        a: { x: -1, y: 0 },
-        arrowright: { x: 1, y: 0 },
-        d: { x: 1, y: 0 }
-    };
-
-    const newDirection = directions[key];
-
+function applyDirection(newDirection) {
     if (!newDirection) {
         return;
     }
@@ -194,7 +195,21 @@ function handleDirectionChange(event) {
     }
 }
 
+function handleDirectionChange(event) {
+    const key = event.key.toLowerCase();
+    applyDirection(INPUT_DIRECTIONS[key]);
+}
+
+function handleTouchDirection(event) {
+    event.preventDefault();
+    const key = event.currentTarget.dataset.dir;
+    applyDirection(INPUT_DIRECTIONS[key]);
+}
+
 document.addEventListener("keydown", handleDirectionChange);
 restartButton.addEventListener("click", resetGame);
+touchButtons.forEach((button) => {
+    button.addEventListener("pointerdown", handleTouchDirection);
+});
 
 resetGame();
