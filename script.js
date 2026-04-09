@@ -7,7 +7,11 @@ const restartButton = document.getElementById("restart-button");
 
 const gridSize = 20;
 const tileCount = board.width / gridSize;
-const tickDelay = 130;
+const INITIAL_DELAY = 130;
+const MIN_DELAY = 50;
+const SPEED_STEP = 15;
+
+let tickDelay = INITIAL_DELAY;
 
 let snake;
 let direction;
@@ -30,6 +34,7 @@ function resetGame() {
     direction = { x: 1, y: 0 };
     nextDirection = { ...direction };
     score = 0;
+    tickDelay = INITIAL_DELAY;
     hasStarted = false;
     isRunning = false;
     scoreElement.textContent = "0";
@@ -92,6 +97,9 @@ function update() {
             localStorage.setItem("snake-best-score", String(bestScore));
         }
 
+        tickDelay = Math.max(MIN_DELAY, tickDelay - SPEED_STEP);
+        clearInterval(gameLoopId);
+        gameLoopId = setInterval(update, tickDelay);
         placeFood();
     } else {
         snake.pop();
